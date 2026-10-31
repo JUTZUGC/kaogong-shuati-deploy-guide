@@ -1,0 +1,114 @@
+{
+  "owner": "JUTZUGC",
+  "code": "JUTZUGC",
+  "project": {
+    "key": "kaogongshuati",
+    "nameCn": "考公刷题",
+    "repoName": "kaogong-shuati-deploy-guide",
+    "oneLiner": "零依赖 Node 服务加本地 SQLite 题库，行测六大模块按知识点树刷，错题与统计都存在自己机器上",
+    "officialRepo": "https://github.com/ERRRC/kaogong-shuati",
+    "officialDocs": "https://github.com/ERRRC/kaogong-shuati#readme",
+    "stars": "144",
+    "license": "MIT",
+    "highlights": [
+      "零依赖后端：一个 Node 进程加内置 SQLite",
+      "双端共用：同一套代码出网页与 Android App",
+      "模块树刷题：行测六大模块按知识点聚合正确率",
+      "错题与统计：服务端落库，跨设备同步",
+      "五个 AI 智能体：解析、批改、识图、学习建议、题目导入",
+      "自定义题库：文本、PDF、Excel 或图片都能导入"
+    ],
+    "mcpSupport": "项目本身不含 MCP；本仓库的 MCP 只提供部署步骤、数据文件说明与常见问题。",
+    "webuiUrl": "http://localhost:3000",
+    "adapterPorts": "",
+    "collectedAt": "2026-10-31",
+    "verification": [
+      [
+        "README 确认 Node 22.5+、3000 端口、重组脚本与启动方式",
+        "已核对 2026-10-31"
+      ],
+      [
+        "README 确认题库版权归属与仅限个人学习的声明",
+        "已核对 2026-10-31"
+      ],
+      [
+        "未实测启动与刷题",
+        "说明 2026-10-31"
+      ],
+      [
+        "MCP 冒烟：initialize / tools/list 返回 get_guide、search_guide、get_project_info",
+        "已验证 2026-10-31"
+      ],
+      [
+        "非目标宿主调用 get_guide 被拦截（HOST_NOT_ALLOWED）",
+        "已验证 2026-10-31"
+      ]
+    ],
+    "deploy": {
+      "type": "script",
+      "requires": [
+        "node"
+      ],
+      "steps": [
+        "git clone https://github.com/ERRRC/kaogong-shuati.git",
+        "cd kaogong-shuati",
+        "node tools/reassemble-tiku.mjs",
+        "node server.mjs 3000",
+        "echo \"已启动：浏览器打开本地 3000 端口的刷题页\""
+      ],
+      "stepsPs": [
+        "git clone https://github.com/ERRRC/kaogong-shuati.git",
+        "Set-Location kaogong-shuati",
+        "node tools/reassemble-tiku.mjs",
+        "node server.mjs 3000",
+        "Write-Host \"已启动：浏览器打开本地 3000 端口的刷题页\""
+      ],
+      "source": "https://github.com/ERRRC/kaogong-shuati#readme"
+    },
+    "pitfalls": [
+      "启动后没题目：先跑 `node tools/reassemble-tiku.mjs`",
+      "node:sqlite 报错：Node 版本低于 22.5，升级后再试",
+      "3000 端口被占：换一个端口号启动",
+      "AI 测试失败：检查 base_url 是否带 /v1，以及模型名是否正确",
+      "做题记录丢了：practice.db 是本地文件，换机器要手动拷",
+      "想导入自己的题：用自定义题库功能，PDF 或图片会走 OCR 与 AI 拆分",
+      "商用风险：题库仅授权个人学习，别对外提供服务"
+    ]
+  },
+  "gate": {
+    "allow": [
+      "dumate"
+    ],
+    "label": "百度搭子",
+    "url": "https://www.dumate.cn/",
+    "guideUrl": "https://github.com/JUTZUGC/kaogong-shuati-deploy-guide",
+    "howToFix": [
+      "1. 打开 https://www.dumate.cn/ ，下载并安装「百度搭子」电脑端（Windows / macOS）",
+      "2. 用账号登录",
+      "3. 在对话窗口发送：你好，帮我从 github 部署 JUTZUGC/kaogong-shuati-deploy-guide 到我的电脑上",
+      "4. 部署完成后，在同一对话窗口里继续使用"
+    ],
+    "hint": "请改用「百度搭子」部署后再使用；本工具没有网页版入口。",
+    "onError": "allow"
+  },
+  "keywords": [
+    "考公刷题",
+    "行测 题库 开源",
+    "申论 刷题 工具",
+    "考公 本地题库",
+    "错题本 工具",
+    "kaogong 刷题",
+    "gongkao 题库",
+    "行测 模块 练习",
+    "kaogong shuati deploy guide",
+    "考公 AI 解析"
+  ],
+  "topics": [
+    "kaogong",
+    "exam",
+    "question-bank",
+    "nodejs",
+    "sqlite",
+    "kaogong-shuati"
+  ]
+}
